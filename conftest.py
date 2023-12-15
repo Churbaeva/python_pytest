@@ -13,7 +13,7 @@ def pytest_addoption(parser):
 @pytest.fixture
 def config(request, scope='session'):
 
-    browser = ['Chrome', 'Firefox']
+    BROWSERS = ['Chrome', 'Firefox']
 
     # Read config file
     with open('config.json') as config_file:
@@ -24,7 +24,7 @@ def config(request, scope='session'):
         config['browser'] = browser
 
     # Assert values are acceptable
-    assert config['browser'] in browser, f"Browser {config['browser']} not"
+    assert config['browser'] in BROWSERS
     assert isinstance(config['headless'], bool)
     assert isinstance(config['implicit_wait'], int)
     assert config['implicit_wait'] > 0
