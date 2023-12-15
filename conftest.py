@@ -2,6 +2,7 @@ import pytest
 import selenium.webdriver
 import json
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from pytest_bdd import given, then, parsers
@@ -13,7 +14,7 @@ def pytest_addoption(parser):
 @pytest.fixture
 def config(request, scope='session'):
 
-    BROWSERS = ['Chrome', 'Firefox']
+    browser = ['Chrome', 'Firefox']
 
     # Read config file
     with open('config.json') as config_file:
@@ -24,7 +25,7 @@ def config(request, scope='session'):
         config['browser'] = browser
 
     # Assert values are acceptable
-    assert config['browser'] in BROWSERS
+    assert config['browser'] in browser, f"Browser {config['browser']} not"
     assert isinstance(config['headless'], bool)
     assert isinstance(config['implicit_wait'], int)
     assert config['implicit_wait'] > 0
@@ -38,7 +39,7 @@ def browser(config):
 
     # Initialize the WebDriver instance
     if config['browser'] == 'Chrome':
-        opts = webdriver.ChromeOptions()
+        opts: Options = webdriver.ChromeOptions()
         if config['headless']:
             opts.add_argument('headless')
         b = webdriver.Chrome(ChromeDriverManager().install(), options=opts)
