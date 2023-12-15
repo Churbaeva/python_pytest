@@ -41,7 +41,7 @@ def browser(config):
         options = webdriver.ChromeOptions()
         if config['headless']:
             options.add_argument('headless')
-        b = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+        a = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     elif config['browser'] == 'Firefox':
         opts = webdriver.FirefoxOptions()
         if config['headless']:
@@ -55,7 +55,7 @@ def browser(config):
     b.implicitly_wait(config['implicit_wait'])
 
     # Return the WebDriver instance for the setup
-    yield b
+    yield a
 
     # Quit the WebDriver instance for the teardown
     b.quit()
