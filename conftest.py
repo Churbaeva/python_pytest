@@ -2,7 +2,6 @@ import pytest
 import selenium.webdriver
 import json
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from pytest_bdd import given, then, parsers
@@ -39,10 +38,10 @@ def browser(config):
 
     # Initialize the WebDriver instance
     if config['browser'] == 'Chrome':
-        opts: Options = webdriver.ChromeOptions()
+        opts = webdriver.ChromeOptions()
         if config['headless']:
             opts.add_argument('headless')
-        b = webdriver.Chrome(ChromeDriverManager().install(), options=opts)
+        b = webdriver.Chrome(ChromeDriverManager().install())
     elif config['browser'] == 'Firefox':
         opts = webdriver.FirefoxOptions()
         if config['headless']:
