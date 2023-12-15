@@ -38,10 +38,10 @@ def browser(config):
 
     # Initialize the WebDriver instance
     if config['browser'] == 'Chrome':
-        opts = webdriver.ChromeOptions()
+        options = webdriver.ChromeOptions()
         if config['headless']:
-            opts.add_argument('headless')
-        b = webdriver.Chrome(ChromeDriverManager().install())
+            options.add_argument('headless')
+        b = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     elif config['browser'] == 'Firefox':
         opts = webdriver.FirefoxOptions()
         if config['headless']:
