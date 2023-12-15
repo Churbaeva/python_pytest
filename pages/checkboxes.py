@@ -11,7 +11,6 @@ class CheckboxesPage(BasePage):
     ALL_CHECKBOXES = (By.XPATH, '//*[@id="checkboxes"]/input')
 
     def __init__(self, browser):
-        super().__init__(browser)
         self.browser = browser
 
     def get_page_title_text(self):
